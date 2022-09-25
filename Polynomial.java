@@ -2,7 +2,8 @@ public class Polynomial {
     double[] myArray;
 
     public Polynomial(){
-        this.myArray = new double[0];
+        this.myArray = new double[1];
+        this.myArray[0] = 0.0; 
     }
 
     public Polynomial(double [] anotherArray){

@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.io.File;
 
 public class Polynomial {
     double[] myArray;
@@ -14,18 +18,51 @@ public class Polynomial {
         this.exponents = exponents;
     }
     
-    /*
-    public Polynomial(File file) {
+    
+    public Polynomial(File file) throws IOException {
     	Scanner input = new Scanner(file);
     	String line = input.nextLine();
     	input.close();
-    	printf("I dont know how to do this function...");
+    	line = line.replace("-", "+-");
+    	String[] terms = line.split("\\+");
+    	this.myArray = new double[terms.length];
+    	this.exponents = new int[terms.length];
+    	int i = 0;
+    	for(String term : terms) {
+    		String[] tmp = term.split("x");
+    		this.myArray[i] = Double.parseDouble(tmp[0]);
+    		if(tmp.length == 1) {
+    			this.exponents[i] = 0;
+    		}else {
+    			this.exponents[i] = Integer.parseInt(tmp[1]);
+    		}
+    		i++;
+    	}
     }
     
-    public void saveToFile(String filename) {
-    	printf("I dont know how to do this function...");
+    public void saveToFile(String thefile) throws IOException {
+    	FileWriter fw = new FileWriter(thefile);
+    	String tmp = "";
+    	int i = 0;
+    	int cur_length = this.exponents.length;
+    	for(i = 0; i < cur_length; i++) {
+    		if(this.exponents[i] == 0) {
+    			tmp = tmp + this.myArray[i];
+    		}else {
+    			tmp = tmp + this.myArray [i] + "x" + this.exponents[i];
+    		}
+    		if(i < cur_length - 1) {
+    			if(this.myArray[i + 1] > 0) {
+    				tmp = tmp + "+";
+    			}else {
+    				continue;
+    			}
+    		}
+    	}
+    	fw.write(tmp);
+    	fw.close();
     }
-    */
+    
 
     public Polynomial add(Polynomial anotherPoly){
         int len1 = this.exponents.length;
